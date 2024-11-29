@@ -1,0 +1,28 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "cppbuild",
+			"label": "C/C++: g++ build active file", // 任务列表中看到的内容，可随意命名
+			"command": "/usr/bin/g++", 
+			"args": [ // 传递给g++的命令行参数
+				"-fdiagnostics-color=always",
+				"-g",
+				"${workspaceFolder}", // 当前工作区中的活动文件
+				"-o",
+				"${fileDirname}/${fileBasenameNoExtension}" // 在路径${fileDirname}生成与活动文件同名五后缀的可执行文件
+			],
+			"options": {
+				"cwd": "${fileDirname}"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true // true代表可通过快捷键ctrl+shift+B来执行该编译任务
+			},
+			"detail": "compiler: /usr/bin/g++"
+		}
+	]
+}
