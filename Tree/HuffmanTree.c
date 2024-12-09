@@ -48,32 +48,33 @@ void buildHuffmanTree(HuffmanNode nodes[], int n) {
 }//buildHuffmanTree
 
 // 生成哈夫曼编码
-void generateHuffmanCodes(HuffmanNode nodes[], int n, HuffmanCode codes[]) {
-    char tempCode[MAX_CODE_LEN];
-    for (int i = 0; i < n; i++) {
+void generateHuffmanCodes(HuffmanNode nodes[], int n, HuffmanCode codes[]) { // HuffmanCode初始为空
+    char tempCode[MAX_CODE_LEN];  // 临时存储编码的缓冲区
+
+    for (int i = 0; i < n; i++) {  // 遍历n个叶子节点
         int current = i;
         int parent = nodes[current].parent;
-        int codeLen = 0;
+        int codeLen = 0;  // 编码长度初始化为0
 
         // 遍历树以生成编码
-        while (parent != -1) {
+        while (parent != -1) {  // 直到到达根节点
             if (nodes[parent].left == current) {
-                tempCode[codeLen++] = '0';
+                tempCode[codeLen++] = '0';  // 如果当前节点是左子节点，则编码为‘0’
             } else {
-                tempCode[codeLen++] = '1';
+                tempCode[codeLen++] = '1';  // 如果当前节点是右子节点，则编码为‘1’
             }
-            current = parent;
-            parent = nodes[current].parent;
+            current = parent;  // 向上移动到父节点
+            parent = nodes[current].parent;  // 更新父节点
         }
 
-        tempCode[codeLen] = '\0';
+        tempCode[codeLen] = '\0';  // 在缓冲区末尾添加字符串结束符
 
-        // 反转生成的代码
+        // 将编码反转存储到最终的哈夫曼编码中
         for (int j = 0; j < codeLen; j++) {
             codes[i].code[j] = tempCode[codeLen - j - 1];
         }
-        codes[i].code[codeLen] = '\0';
-        codes[i].symbol = nodes[i].symbol;
+        codes[i].code[codeLen] = '\0';  // 在末尾添加字符串结束符
+        codes[i].symbol = nodes[i].symbol;  // 记录符号
     }
 }
 
@@ -83,7 +84,7 @@ void printHuffmanTree(HuffmanNode nodes[], int n) {
     for (int i =0; i < 2 * n - 1; i++) {
         printf("Node %d: Symbol=%s, Weight=%d, Parent=%d, Left=%d, Right=%d\n",
        i,
-       nodes[i].symbol == '\0' ? "Internal" : &nodes[i].symbol,
+       nodes[i].symbol == '\0' ? "Internal" : nodes[i].symbol,  // 内部节点显示为Internal
        nodes[i].weight,
        nodes[i].parent,
        nodes[i].left,
