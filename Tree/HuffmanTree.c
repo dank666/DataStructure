@@ -84,7 +84,7 @@ void printHuffmanTree(HuffmanNode nodes[], int n) {
     for (int i =0; i < 2 * n - 1; i++) {
         printf("Node %d: Symbol=%s, Weight=%d, Parent=%d, Left=%d, Right=%d\n",
        i,
-       nodes[i].symbol == '\0' ? "Internal" : (char[]){nodes[i].symbol, '\0'},  // 内部节点显示为Internal
+       nodes[i].symbol == '\0' ? "Internal" : &nodes[i].symbol,  // 内部节点显示为Internal
        nodes[i].weight,
        nodes[i].parent,
        nodes[i].left,
